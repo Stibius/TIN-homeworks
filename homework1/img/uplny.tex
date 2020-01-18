@@ -1,0 +1,19 @@
+\documentclass[11pt]{article}
+\usepackage{vaucanson-g}
+\begin{document}
+\begin{VCPicture}{(-1,10)(0,11)}
+%5 states
+\State[A]{(-7.775,14.85)}{Q0} \FinalState[B]{(-6,16)}{Q1} \FinalState[D]{(-3,16)}{Q2}
+\FinalState[E]{(0,16)}{Q3} \State[F]{(-10,21)}{Q5}
+%1 initial-final
+\Initial{Q0}
+%13 transitions
+\ArcL{Q0}{Q1}{a} \ArcL{Q0}{Q5}{c}
+\EdgeL{Q1}{Q2}{c} \ArcL{Q1}{Q5}{a}
+\ArcR{Q1}{Q5}{b} \LArcR{Q2}{Q1}{a}
+\EdgeL{Q2}{Q3}{c} \LoopN{Q3}{c}
+\ArcR{Q3}{Q5}{a} \LArcR{Q3}{Q5}{b}
+\LoopN{Q5}{a,b,c} \LoopS{Q0}{b}
+\LArcL{Q2}{Q0}{b}
+\end{VCPicture}
+\end{document}

@@ -1,0 +1,21 @@
+\documentclass[11pt]{article}
+\usepackage{vaucanson-g}
+\begin{document}
+\begin{VCPicture}{(-5,14)(-4,15)}
+%7 states
+\StateVar[A]{(-13.65,15.925)}{Q0} \State[B]{(-11.075,15.925)}{Q1} \FinalState[C]{(-12.175,11.575)}{Q2}
+\State[D]{(-13.6,19.375)}{Q3} \State[E]{(-6.3,19.35)}{Q4} \FinalState[F]{(-8.5,15.925)}{Q5}
+\State[G]{(-11.075,13.5)}{Q6}
+%1 initial-final
+\Initial{Q0}
+%16 transitions
+\EdgeL{Q0}{Q1}{a} \EdgeL{Q0}{Q2}{b}
+\EdgeL{Q0}{Q3}{c} \EdgeL[0.7]{Q1}{Q4}{a}
+\EdgeL{Q1}{Q5}{b} \EdgeL{Q1}{Q3}{c}
+\LoopN[0.5]{Q3}{a,b,c} \LoopN[0.5]{Q4}{a}
+\EdgeL{Q4}{Q3}{c} \EdgeL{Q5}{Q3}{a,b}
+\EdgeL{Q5}{Q6}{c} \EdgeL{Q6}{Q1}{a}
+\EdgeL[0.5]{Q6}{Q2}{b} \VCurveR[0.5]{angleA=180,angleB=180}{Q2}{Q3}{a,b,c}
+\VCurveL[0.7]{angleB=345,ncurv=2}{Q6}{Q3}{c} \VCurveL[0.45]{angleA=270,angleB=0}{Q4}{Q2}{b}
+\end{VCPicture}
+\end{document}

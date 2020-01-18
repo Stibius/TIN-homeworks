@@ -1,0 +1,246 @@
+\documentclass[a4paper,11pt]{article}[24.3.2010]
+\usepackage[left=2cm,top=3cm,text={17cm, 24cm}]{geometry}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{picture}
+\usepackage{eurosym}
+\usepackage{lastpage}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{enumerate}
+\pagestyle{fancy}
+\newcommand\myuv[1]{\quotedblbase #1\textquotedblleft}
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+\author{Jan Vybíral\\xvybir05@stud.fit.vutbr.cz}
+\title{Typografie a publikování -- 1. projekt}
+\date{}
+\rhead{\textbf{Jan Vybíral, XVYBIR05}}
+ 
+\begin{document}
+
+
+
+\begin{enumerate}
+\item Operace $rot$ transformuje libovolný jazyk $L$ na jazyk $rot(L)=\{uv \mid vu \in L\}$. Dokažte, že je třída $P$ uzavřená na operaci $rot$.
+\begin{itemize}
+\item Třída $P$ je uzavřená na operaci $rot$ $\Leftrightarrow \forall L \in P : rot(L) \in P$. 
+\item Z toho, že $L \in P$, plyne, že ho lze přijímat DTS v polynomiálním čase.
+\item Víme ovšem, že každý DTS přijímající $L$ v polynomiálním čase lze převést na úplný DTS rozhodující $L$ v polynomiálním čase.
+\item Nechť tedy $M$ je úplný DTS rozhodující $L$ v polynomiálním čase $P(n)$.
+\item Sestrojíme 2-páskový úplný DTS $M_{rot}$ rozhodující $rot(L)$ v polynomiálním čase:
+\begin{itemize}
+\item $M_{rot}$ svůj vstup  $w$ systematicky postupně rozdělí všemi možnými způsoby na 2 podřetězce $u,v$ takové, že $w=uv$ (způsobů rozdělení je $|w|+1$). To má časovou složitost $\mathcal{O}(n)$.
+\item Pro každé rozdělení zapíše na 2. pásku řetězec $vu$ (to má časovou složitost $\mathcal{O}(n)$) a odsimuluje na něm úplný DTS $M$ rozhodující $L$ (to má časovou složitost $P(n)$). 
+\item Pokud $M$ pro nějaké rozdělení přijme, $M_{rot}$ také přijme. Pokud $M$ odmítne pro všechna rozdělení, $M_{rot}$ odmítne.
+\end{itemize}
+\item $M_{rot}$ zřejmě rozhoduje $rot(L)$ a to s časovou složitostí $\mathcal{O}(n) \cdot (P(n) + \mathcal{O}(n)) \in \mathcal{O}(n^k)$ pro $k \in \mathbb{N}$.
+\item Ukázali jsme, že pro každý $L \in P$ lze sestrojit úplný DTS $M_{rot}$ rozhodující $rot(L)$ v polynomiálním čase, tudíž platí, že $\forall L \in P : rot(L) \in P$, třída $P$ tedy je uzavřená na operaci $rot$.
+\end{itemize}
+\newpage
+\item Teta Květa stojí před regálem se zeleninou a nehýbá se, protože má těžký rozhodovací problém. Potřebuje sníst co nejvíce vitamínu C, aby ji přešla chřipka. Každý druh zeleniny je charakteristický obsahem vitamínu C na kilo a cenou za kilo. Teta se snaží přijít na to, jestli je možné nakoupit zeleninu za obnos $O$ v její peněžence tak, aby úhrn vitamínu C byl alespoň $C$. Kromě toho s každým kilem zeleniny přidá zelinář deset deka brokolice zdarma, což obsahuje množství $B$ vitamínu C. Dokažte, že je Květin problém NP-úplný. Těžkost dokažte redukcí z některého problému uvedeného v odstavci \uv{NP-complete problems} zde:\\ \texttt{http://en.wikipedia.org/wiki/NP-complete\_problems\#NP-complete\_problems}. \\
+
+Květin problém je charakterizován jazykem:\\
+$L_{K}=\{\langle\{(c_{1},p_{1}),\dots,(c_{n},p_{n})\},C,O\rangle\mid\{(c_{1},p_{1}),\dots,(c_{n},p_{n})\}$ je $n$-prvková množina dvojic, pro nějaké $n\geq 0$, kde každá dvojice reprezentuje jeden z druhů zeleniny, $c_{i}$ je součet množství vitamínu C na kilo v zelenině $i$ s množstvím vitamínu C v brokolici přidávané zdarma ke každému zakoupenému kilu zeleniny, $p_{i}$ je cena za kilo zeleniny $i$, $C$ je minimální požadované množství vitamínu C, $O$ je obnos v Květině peněžence, přitom lze vytvořit $k$-prvkovou podmnožinu množiny $\{(c_{1},p_{1}),\dots,(c_{n},p_{n})\}$ $\{(c_{1},p_{1}),\dots,(c_{k},p_{k})\}$ pro nějaké $k$, pro které platí $0\leq k\leq n$, tak, že exisuje $k$-prvková posloupnost přirozených čísel $x_{1},\dots,x_{k}$ pro kterou platí: $x_{1}\cdot c_{1}+\dots+x_{k}\cdot c_{k}\geq C \wedge x_{1}\cdot p_{1}+\dots+x_{k}\cdot p_{k}\leq O$, kde $x_{i}$ je počet zakoupených kilogramů zeleniny $i$ (předpokládáme, že maximální zakoupitelné množství každého druhu zeleniny není nijak omezeno)$\}$\\
+
+%$L=\{\langle R,O,C\rangle \mid R $ je množina druhů zeleniny, $O$ obnos v Květině peněžence, $C$ minimální požadované množství vitamínu $C \}$\\
+
+Množina $\{(c_{1},p_{1}),\dots,(c_{n},p_{n})\}$ může být zakódována pomocí $\langle$ $\rangle$ jako posloupnost vhodně oddělených dvojic vhodně oddělených binárně zakódovaných přirozených čísel, $C$ i $O$ lze zakódovat jako vhodně oddělená binárně zakódovaná přirozená čísla. Např. instanci Květina problému $(\{(0,1),(2,3)\},2,3)$ můžeme zakódovatv takto:
+$(00,01)|(10,11)|10|11$
+
+\begin{enumerate}[I/]
+\item Květin problém je v NP\\
+Pro dokázání tohoto tvrzení popíšeme fungování nedeterministického Turingova stroje přijímajícího jazyk $L_{K}$ v polynomiálním čase.Při rozhodování, zda vstupní řetězec $w \in L_{K}$ můžeme postupovat takto:\\
+\begin{enumerate}[1.]
+\item Ověříme, zda se jedná o platný kód $\langle\{(c_{1},p_{1}),\dots,(c_{n},p_{n})\}C,O\rangle$.
+\begin{itemize}
+%(složitost $\mathcal{O}(n)$
+\item Kontrola správného užití oddělovačů (složitost $\mathcal{O}(n)$).
+\item Kontrola, zda vstup obsahuje alespoň $C$ a $O$ (regál se zeleninou může klidně být i prázdný) (složitost $\mathcal{O}(n)$).
+\end{itemize}
+\item Zjistíme počet prvků $n$ množiny $\{(c_{1},p_{1}),\dots,(c_{n},p_{n})\}$. Za tímto účelem procházíme dvojice $(c_{i},p_{i})$ na vstupu (složitost $\mathcal{O}(n)$) a na pomocné pásce inkrementujeme hodnotu $n$ (složitost $\mathcal{O}(n)$).
+\item Pokud $n = 0$ (složitost $\mathcal{O}(n)$): přijmeme, pokud $C = 0$ (složitost $\mathcal{O}(n)$), jinak zamítneme.
+\item Jinak náhodně zvolíme nějaké $k$ takové, že $0< k\leq n$ a označíme $k$ náhodně zvolených dvojic $(c_{i},p_{i})$ dodáním vhodné značky ke kódu dvojice. Za tímto účelem zapíšeme $k$ na pomocnou pásku (složitost $\mathcal{O}(n)$), následně projdeme vstupní pásku a označíme $k$ náhodně vybraných dvojic (složitost $\mathcal{O}(n)$) při současné dekrementaci $k$ na pomocné pásce (složitost $\mathcal{O}(n)$). 
+\item Pro každou označenou dvojici náhodně zvolíme celočíselné $x>0$ a následně zkopírujeme danou dvojici $x$-krát na 1. pomocnou pásku. Za tímto účelem pro každou označenou dvojici (složitost $\mathcal{O}(n)$) zapíšeme $x$ na 2. pomocnou pásku (složitost $\mathcal{O}(n)$), potom $x$-krát zkopírujeme danou dvojici ze vstupní pásky na 1. pomocnou pásku (složitost $\mathcal{O}(n)$), přičemž po každém zkopírování dekrementujeme $x$ na 2. pomocné pásce (složitost $\mathcal{O}(n)$).
+\item Na 2. a 3. pomocnou pásku zapíšeme 0 (konstantní složitost). Procházíme jednotlivé dvojice zapsané na 1. pomocné pásce (složitost $\mathcal{O}(n)$) a pro každou z nich přičteme k číslu na 2. pomocné pásce její hodnotu $p$ (složitost $\mathcal{O}(n)$)
+ a k číslu na 3. pomocné pásce její hodnotu $c$ (složitost $\mathcal{O}(n)$).
+\item Pokud je číslo na 2. pomocné pásce větší než $O$ (složitost $\mathcal{O}(n)$), odmítneme. Jinak pokud je číslo na 3. pomocné pásce větší nebo rovno $C$ (složitost $\mathcal{O}(n)$), přijmeme, jinak odmítneme.
+\end{enumerate}
+Celý tento postup má evidentně exponenciální složitost, Květin problém je tedy v NP.\\
+\item Květin problém je NP-těžký\\\\
+Použijeme polynomiální redukci z NP-úplného problému Unbounded Knapsack\\ 
+(\texttt{http://en.wikipedia.org/wiki/Knapsack\_problem}),\\
+ resp. jeho verze definované zde:\\ 
+\texttt{http://cgm.cs.mcgill.ca/$\sim$avis/courses/360/2003/assignments/sol4.pdf}\\
+
+Unbounded Knapsack problém:\\
+Je dána množina druhů předmětů, každý druh je charakterizován svou vahou a hodnotou. Ptáme se, kolik předmětů od každého druhu vybrat tak, aby celková váha výběru byla menší nebo rovna nějaké konstantě a přitom celková hodnota výběru byla větší nebo rovna nějaké jiné konstantě.\\
+
+Jazyk specifikující problém Unbounded Knapsack je tedy:\\ 
+$L_{U}=\{\langle\{(v_{1},w_{1}),\dots,(v_{n},w_{n})\},V,W\rangle\mid\{(v_{1},w_{1}),\dots,(v_{n},w_{n})\}$ je $n$-prvková množina dvojic, pro nějaké $n\geq 0$, kde každá dvojice reprezentuje jeden z druhů předmětů, $v_{i}$ je hodnota druhu předmětu $i$, $w_{i}$ je váha druhu předmětu $i$, $V$ je minimální požadovaná hodnota, $W$ je maximální váha, přitom lze vytvořit $k$-prvkovou podmnožinu množiny $\{(v_{1},w_{1}),\dots,(v_{n},w_{n})\}$\\ $\{(v_{1},w_{1}),\dots,(v_{k},w_{k})\}$ pro nějaké $k$, pro které platí $0\leq k\leq n$, tak, že exisuje $k$-prvková posloupnost přirozených čísel $x_{1},\dots,x_{k}$ pro kterou platí: $x_{1}\cdot v_{1}+\dots+x_{k}\cdot v_{k}\geq V \wedge x_{1}\cdot w_{1}+\dots+x_{k}\cdot w_{k}\leq W$, kde $x_{i}$ je počet vybraných předmětů druhu $i\}$\\
+
+Ke každé instanci Unbounded Knapsack můžeme sestavit instanci Květina problému takto:
+\begin{align*} 
+\{(c_{1},p_{1}),\dots,(c_{n},p_{n})\}&= \{(v_{1},w_{1}),\dots,(v_{n},w_{n})\}\\
+C&=V\\
+O&=W
+\end{align*} 
+Uvedenou redukci lze implementovat úplným DTS $M_{\delta}$  pracujícím v polynomiálním čase. Stačí, když $M_{\delta}$ zkontroluje, zda má na vstupu korektně zformovanou instanci Unbounded Knapsack problému (postup bude zcela totožný jako výše uvedený postup kontroly pro Květin problém). Pokud ne, vypíše nějakou instanci Květina problému, která nepatří do $L_{K}$, pokud ano, vypíše svůj nezměněný vstup, protože instance Unbounded Knapsack problému mají úplně stejný formát jako instance Květina problému.\\
+
+Zřejmě platí: \\$M_{\delta}$ má na vstupu instanci patřící do jazyka $L_{U} \Leftrightarrow$ výstup $M_{\delta}$ je instance patřící do jazyka $L_{K}$.
+
+\end{enumerate}
+
+Je tedy dokázáno, že Květin problém je NP-úplný.\\
+
+Z dálky na tetu volá synovec Alan, ať nezoufá, že to za chvíli (rozuměj, v polynomiálním čase) vyřeší s pomocí jakéhosi psacího stroje vlastní výroby s nekonečnou páskou. Co to znamená pro lidstvo?\\\\
+Znamená to, že $P=NP$.
+
+
+\newpage
+\item Dokažte, že
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+\item $\mathcal{O}(2^n) \subset \mathcal{O}(2^{2^n})$
+\item $\mathcal{O}(n^3) = \mathcal{O}(n^3 - 10n + 5)$
+\item $\mathcal{O}(log_{2}(5n*(7n)^{2n})) = \mathcal{O}(n*log_{3}(10n))$
+\end{enumerate}
+\renewcommand{\theenumi}{\arabic{enumi}}
+V bodech (a), (b) bude třeba dokázat dva směry, $\subseteq$ a $\not\supseteq$, $\subseteq$ a $\supseteq$. Pro (c) si zopakujte pravidla pro počítání s logaritmy.
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+\item $\mathcal{O}(2^n) \subset \mathcal{O}(2^{2^n})$\\\\
+Z definice $\mathcal{O}(f(n))$:\\
+      $\mathcal{O}(2^n) = \{g \in \mathcal{F} \mid \exists c \in \mathbb{R}^+ \hspace{3pt} \exists n_{0} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{0} \Rightarrow 0 \leq g(n) \leq c*2^n\}$\\
+      $\mathcal{O}(2^{2^n}) = \{g \in \mathcal{F} \mid \exists c \in \mathbb{R}^+ \hspace{3pt} \exists n_{0} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{0} \Rightarrow 0 \leq g(n) \leq c*2^{2^n}\}$\\\\
+      Vlastní podmnožina:\\
+      $\mathcal{O}(2^n) \subset \mathcal{O}(2^{2^n}) \Leftrightarrow \mathcal{O}(2^n) \subseteq \mathcal{O}(2^{2^n}) \wedge \mathcal{O}(2^n) \not\supseteq \mathcal{O}(2^{2^n})$\\\\
+      Nejprve dokážeme, že $\mathcal{O}(2^n) \subseteq \mathcal{O}(2^{2^n})$:\\
+      $\mathcal{O}(2^n) \subseteq \mathcal{O}(2^{2^n})$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} : (f \in \mathcal{O}(2^n) \Rightarrow f \in \mathcal{O}(2^{2^n}))$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} : \\ (\exists c_{1} \in \mathbb{R}^+ \hspace{3pt} \exists n_{01} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{01} \Rightarrow 0 \leq f(n) \leq c_{1}*2^n)$\\
+      $\Rightarrow$\\
+      $(\exists c_{2} \in \mathbb{R}^+ \hspace{3pt} \exists n_{02} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{02} \Rightarrow 0 \leq f(n) \leq c_{2}*2^{2^n})$\\\\
+      Zvolme $c_{1}=c_{2}=1,n_{01}=n_{02}=1$:\\
+      $\forall f \in \mathcal{F} : \\ (\forall n \in \mathbb{N} : n \geq 1 \Rightarrow 0 \leq f(n) \leq 1*2^n)$\\
+      $\Rightarrow$\\
+      $(\forall n \in \mathbb{N} : n \geq 1 \Rightarrow 0 \leq f(n) \leq 1*2^{2^n})$\\\\
+      Je zřejmé, že pravá strana implikace musí platit vždy, když platí strana levá, protože platí, že $\forall n \in \mathbb{N} \Rightarrow 1*2^{2^n} > 1*2^n$. Implikace tudíž musí vždy platit, takže platí, že $\mathcal{O}(2^n) \subseteq \mathcal{O}(2^{2^n})$.\\
+
+      Ještě dokážeme, že $\mathcal{O}(2^n) \not\supseteq \mathcal{O}(2^{2^n})$: \\
+      $\mathcal{O}(2^n) \not\supseteq \mathcal{O}(2^{2^n})$\\
+      $\Leftrightarrow$\\
+      $\exists g \in \mathcal{F} : g \in \mathcal{O}(2^{2^n}) \wedge g \notin \mathcal{O}(2^n)$\\
+      $\Leftrightarrow$\\
+      $\exists g \in \mathcal{F} : \\(\exists c_{1} \in \mathbb{R}^+ \hspace{3pt} \exists n_{01} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{01} \Rightarrow 0 \leq g(n) \leq c_{1}*2^{2^n})$\\
+      $\wedge$\\
+      $(\forall c_{2} \in \mathbb{R}^+ \hspace{3pt} \forall n_{02} \in \mathbb{N} \hspace{3pt} \exists n \in \mathbb{N} : n \geq n_{02} \Rightarrow g(n) < 0 \vee g(n) > c_{2}*2^n)$\\\\
+      Zvolme $g(n)=2^{2^n}$. Tato funkce splňuje levou část konjunkce např. pro $c_{1}=1, n_{01}=0$. Zároveň pro ni platí, že pro jakékoli  $c_{2}$ lze najít takové $x \in \mathbb{N}$, že pro jakékoliv $n>x$  je $g(n)>c_{2}*2^n$. Tím pádem je splněna i pravá strana konjunkce, takže platí, že $\mathcal{O}(2^n) \not\supseteq \mathcal{O}(2^{2^n})$.\\\\
+Dokázali jsme oba směry, takže musí platit, že \\$\mathcal{O}(2^n) \subset \mathcal{O}(2^{2^n})$.\\
+%\newpage
+\item $\mathcal{O}(n^3) = \mathcal{O}(n^3 - 10n + 5)$\\\\
+Z definice $\mathcal{O}(f(n))$:\\
+      $\mathcal{O}(n^3) = \{g \in \mathcal{F} \mid \exists c \in \mathbb{R}^+ \hspace{3pt} \exists n_{0} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{0} \Rightarrow 0 \leq g(n) \leq c*n^3\}$\\
+      $\mathcal{O}(n^3 - 10n + 5) = \{g \in \mathcal{F} \mid \exists c \in \mathbb{R}^+ \hspace{3pt} \exists n_{0} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{0} \Rightarrow 0 \leq g(n) \leq c*(n^3 - 10n + 5)\}$\\\\
+      Rovnost množin:\\
+      $\mathcal{O}(n^3) = \mathcal{O}(n^3 - 10n + 5) \Leftrightarrow \mathcal{O}(n^3) \subseteq \mathcal{O}(n^3 - 10n + 5) \wedge \mathcal{O}(n^3) \supseteq \mathcal{O}(n^3 - 10n + 5)$\\\\
+      Nejprve dokážeme, že $\mathcal{O}(n^3) \subseteq \mathcal{O}(n^3 - 10n + 5)$:\\
+      $\mathcal{O}(n^3) \subseteq \mathcal{O}(n^3 - 10n + 5)$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} : (f \in \mathcal{O}(n^3) \Rightarrow f \in \mathcal{O}(n^3 - 10n + 5))$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} : \\ (\exists c_{1} \in \mathbb{R}^+ \hspace{3pt} \exists n_{01} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{01} \Rightarrow 0 \leq f(n) \leq c_{1}*n^3)$\\
+      $\Rightarrow$\\
+      $(\exists c_{2} \in \mathbb{R}^+ \hspace{3pt} \exists n_{02} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{02} \Rightarrow 0 \leq f(n) \leq c_{2}*(n^3 - 10n + 5))$\\\\
+      Zvolme $c_{1}=1, c_{2}=2,n_{01}=n_{02}=5$:\\
+      $\forall f \in \mathcal{F} : \\(\forall n \in \mathbb{N} : n \geq 5 \Rightarrow 0 \leq f(n) \leq 1*n^3)$\\
+      $\Rightarrow$\\
+      $(\forall n \in \mathbb{N} : n \geq 5 \Rightarrow 0 \leq f(n) \leq 2*(n^3 - 10n + 5))$\\\\
+      Je zřejmé, že pravá strana implikace musí platit vždy, když platí strana levá, protože platí, že $\forall n \in \mathbb{N} : n \geq 5 \Rightarrow 2*(n^3 - 10n + 5) > 1*n^3$. Implikace tudíž musí vždy platit, takže platí, že $\mathcal{O}(n^3) \subseteq \mathcal{O}(n^3 - 10n + 5)$.\\
+
+      Ještě dokážeme, že $\mathcal{O}(n^3) \supseteq \mathcal{O}(n^3 - 10n + 5)$:\\
+      $\mathcal{O}(n^3) \supseteq \mathcal{O}(n^3 - 10n + 5)$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} : (f \in \mathcal{O}(n^3 - 10n + 5) \Rightarrow f \in \mathcal{O}(n^3))$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} : \\ (\exists c_{1} \in \mathbb{R}^+ \hspace{3pt} \exists n_{01} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{01} \Rightarrow 0 \leq f(n) \leq c_{1}*(n^3 - 10n + 5))$\\
+      $\Rightarrow$\\
+      $(\exists c_{2} \in \mathbb{R}^+ \hspace{3pt} \exists n_{02} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{02} \Rightarrow 0 \leq f(n) \leq c_{2}*n^3)$\\\\
+      Zvolme $c_{1}=c_{2}=1,n_{01}=n_{02}=1$:\\
+      $\forall f \in \mathcal{F} : \\(\forall n \in \mathbb{N} : n \geq 1 \Rightarrow 0 \leq f(n) \leq 1*(n^3 - 10n + 5))$\\
+      $\Rightarrow$\\
+      $(\forall n \in \mathbb{N} : n \geq 1 \Rightarrow 0 \leq f(n) \leq 1*n^3)$\\\\
+      Je zřejmé, že pravá strana implikace musí platit vždy, když platí strana levá, protože platí, že $\forall n \in \mathbb{N} : n \geq 1 \Rightarrow 1*n^3 > 2*(n^3 - 10n + 5)$. Implikace tudíž musí vždy platit, takže platí, že $\mathcal{O}(n^3) \supseteq \mathcal{O}(n^3 - 10n + 5)$.\\\\
+Dokázali jsme oba směry, takže musí platit, že $\mathcal{O}(n^3) = \mathcal{O}(n^3 - 10n + 5)$.\\
+%\newpage
+\item $\mathcal{O}(log_{2}(5n*(7n)^{2n})) = \mathcal{O}(n*log_{3}(10n))$\\
+
+      Funkce lze převést na tyto tvary:\\
+      $log_{2}(5n*(7n)^{2n}) = \frac{ln(5n)+2n*ln(7n)}{ln(2)}$\\
+      $n*log_{3}(10n) = \frac{n*ln(10n)}{ln(3)}$\\
+
+      Z definice $\mathcal{O}(f(n))$:\\
+      $\mathcal{O}(\frac{ln(5n)+2n*ln(7n)}{ln(2)}) = \{g \in \mathcal{F} \mid \exists c \in \mathbb{R}^+ \hspace{3pt} \exists n_{0} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{0} \Rightarrow 0 \leq g(n) \leq c*\frac{ln(5n)+2n*ln(7n)}{ln(2)}\}$\\\\
+      $\mathcal{O}(\frac{n*ln(10n)}{ln(3)}) = \{g \in \mathcal{F} \mid \exists c \in \mathbb{R}^+ \hspace{3pt} \exists n_{0} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{0} \Rightarrow 0 \leq g(n) \leq c*\frac{n*ln(10n)}{ln(3)}\}$\\\\
+      Rovnost množin:\\
+      $(\mathcal{O}(\frac{ln(5n)+2n*ln(7n)}{ln(2)}) = \mathcal{O}(\frac{n*ln(10n)}{ln(3)})) \Leftrightarrow 
+\forall f \in \mathcal{F} :\\ (f \in \mathcal{O}(\frac{ln(5n)+2n*ln(7n)}{ln(2)}) \Rightarrow f \in \mathcal{O}(\frac{n*ln(10n)}{ln(3)})) \wedge (f \in \mathcal{O}(\frac{n*ln(10n)}{ln(3)}) \Rightarrow f \in \mathcal{O}(\frac{ln(5n)+2n*ln(7n)}{ln(2)}))$\\
+
+      Nejprve dokážeme implikaci na levé straně konjunkce:\\
+      $\forall f \in \mathcal{F} : (f \in \mathcal{O}(\frac{ln(5n)+2n*ln(7n)}{ln(2)}) \Rightarrow f \in \mathcal{O}(\frac{n*ln(10n)}{ln(3)}))$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} :\\ (\exists c_{1} \in \mathbb{R}^+ \hspace{3pt} \exists n_{01} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{01} \Rightarrow 0 \leq f(n) \leq c_{1}*\frac{ln(5n)+2n*ln(7n)}{ln(2)})$\\
+      $\Rightarrow$\\
+      $(\exists c_{2} \in \mathbb{R}^+ \hspace{3pt} \exists n_{02} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{02} \Rightarrow 0 \leq f(n) \leq c_{2}*\frac{n*ln(10n)}{ln(3)})$\\\\
+      Zvolme $c_{2}=c_{1}*\frac{ln(3)*(ln(5n)+2n*ln(7n))}{ln(10n)*ln(2)*n},n_{02}=n_{01}$.\\ 
+      Jelikož $c_{1}*\frac{ln(3)*(ln(5n)+2n*ln(7n))}{ln(10n)*ln(2)*n}*\frac{n*ln(10n)}{ln(3)}=c_{1}*\frac{ln(5n)+2n*ln(7n)}{ln(2)}$, je zřejmé, že pravá strana implikace musí platit vždy, když platí část levá. Implikace tedy musí být vždy pravdivá.\\
+      
+      Ještě dokážeme implikaci na pravé straně konjunkce:\\
+      $\forall f \in \mathcal{F} : (f \in \mathcal{O}(\frac{n*ln(10n)}{ln(3)}) \Rightarrow f \in \mathcal{O}(\frac{ln(5n)+2n*ln(7n)}{ln(2)}))$\\
+      $\Leftrightarrow$\\
+      $\forall f \in \mathcal{F} :\\ (\exists c_{1} \in \mathbb{R}^+ \hspace{3pt} \exists n_{01} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{01} \Rightarrow 0 \leq f(n) \leq c_{1}*\frac{n*ln(10n)}{ln(3)})$\\
+      $\Rightarrow$\\
+      $(\exists c_{2} \in \mathbb{R}^+ \hspace{3pt} \exists n_{02} \in \mathbb{N} \hspace{3pt} \forall n \in \mathbb{N} : n \geq n_{02} \Rightarrow 0 \leq f(n) \leq c_{2}*\frac{ln(5n)+2n*ln(7n)}{ln(2)})$\\\\
+      Zvolme $c_{2}=c_{1}*\frac{ln(10n)*ln(2)*n}{ln(3)*(ln(5n)+2n*ln(7n))},n_{02}=n_{01}$.\\ 
+      Jelikož $c_{1}*\frac{ln(10n)*ln(2)*n}{ln(3)*(ln(5n)+2n*ln(7n))}*\frac{ln(5n)+2n*ln(7n)}{ln(2)}=\frac{n*ln(10n)}{ln(3)}$, je zřejmé, že pravá strana implikace musí platit vždy, když platí část levá. Implikace tedy musí být vždy pravdivá.\\\\
+      Dokázali jsme obě strany konjunkce, takže skutečně platí, že $\mathcal{O}(log_{2}(5n*(7n)^{2n})) = \mathcal{O}(n*log_{3}(10n))$.
+\end{enumerate}
+\renewcommand{\theenumi}{\arabic{enumi}}
+\newpage
+\item Pomocí počátečních funkcí a operátorů kombinace, kompozice a primitivní rekurze vyjádřete funkci:\\
+\begin{center}
+        $tripleplus : \mathbb{N}^3 \rightarrow \mathbb{N}, tripleplus(x,y,z)=x+y+z$.\\
+\end{center}
+Nepoužívejte žádné funkce zavedené na přednáškách mimo funkce počáteční, nepoužívejte zjednodušenou syntaxi zápisu funkcí - dodržte přesně definiční tvar operátorů kombinace, kompozice a primitivní rekurze.
+\begin{eqnarray*}
+       h(x,y,z)&=&\sigma\circ\pi^{3}_{3}(x,y,z)\\
+       plus(x,0)&=&\pi^{1}_{1}(x,0)\\
+       plus(x,y+1)&=&h(x, y, plus(x, y))\\
+       g(x,y,z,a)&=&\sigma\circ\pi^{4}_{4}(x,y,z,a)\\
+       tripleplus(x,y,0)&=&plus\circ(\pi^{3}_{1}\times\pi^{3}_{2})(x,y,0)\\
+       tripleplus(x,y,z+1)&=&g(x,y,z, tripleplus(x, y,z))\\
+  \end{eqnarray*}
+ 
+
+
+
+ 
+
+  
+  
+ 
+
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

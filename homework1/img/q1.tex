@@ -1,0 +1,16 @@
+\documentclass[11pt]{article}
+\usepackage{vaucanson-g}
+\begin{document}
+\begin{VCPicture}{(-1,10)(0,11)}
+%5 states
+\State[III]{(-7.4,12.675)}{Q0} \FinalState[I]{(-3.875,12.725)}{Q1} \State[II]{(-4.55,16.75)}{Q3}
+\State[V]{(-10.8,15.925)}{Q4} \State[VI]{(-10.85,10)}{Q5}
+%1 initial-final
+\Initial{Q0}
+%7 transitions
+\EdgeL{Q0}{Q4}{a} \EdgeL[0.5]{Q0}{Q1}{b}
+\EdgeR{Q3}{Q0}{c} \EdgeR{Q4}{Q5}{a}
+\EdgeL{Q4}{Q3}{b} \LoopS{Q5}{a}
+\EdgeL{Q5}{Q1}{b}
+\end{VCPicture}
+\end{document}

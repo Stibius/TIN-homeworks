@@ -1,0 +1,20 @@
+\documentclass[11pt]{article}
+\usepackage{vaucanson-g}
+\begin{document}
+\begin{VCPicture}{(0,2)(9,15)}
+%6 states
+\FinalState[q0]{(1,8)}{Q0} \FinalState[q1]{(1,1)}{Q1} \FinalState[q2]{(11,8)}{Q2}
+\State[q3]{(11,1)}{Q3} \State[q4]{(7,14)}{Q4} \FinalState[q5]{(19.6,5.625)}{Q5}
+%1 initial-final
+\Initial{Q0}
+%16 transitions
+\ArcL[0.45]{Q0}{Q4}{} \ArcL[0.45]{Q0}{Q2}{}
+\LoopN{Q0}{} \ArcL[0.45]{Q0}{Q1}{}
+\VArcL{arcangle=135,ncurv=1.5}{Q0}{Q5}{} \ArcL{Q1}{Q0}{}
+\VArcR{arcangle=-45,ncurv=1}{Q1}{Q5}{} \LoopN{Q2}{}
+\EdgeL{Q2}{Q3}{} \ArcL{Q2}{Q0}{}
+\ArcL{Q2}{Q5}{} \EdgeL{Q3}{Q0}{}
+\ArcR{Q3}{Q5}{} \ArcL[0.45]{Q4}{Q0}{}
+\ArcL{Q4}{Q5}{} \LoopN{Q5}{}
+\end{VCPicture}
+\end{document}

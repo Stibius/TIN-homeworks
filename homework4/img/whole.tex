@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+\usepackage{vaucanson-g}
+\begin{document}
+\begin{VCPicture}{(-7,-6)(28,14)}
+%49 states
+\State[s]{(-6,13)}{Q0} \FinalState[f]{(-4,13)}{Q1} \State[s]{(-6,7)}{Q13}
+\State{(-4,7)}{Q14} \FinalState[f]{(-2,7)}{Q15} \FinalState[f]{(-4,11)}{Q2}
+\FinalState[f]{(24,3)}{Q21} \State{(22,3)}{Q22} \State{(20,4)}{Q23}
+\State{(13,2)}{Q24} \State{(15,2)}{Q25} \State{(-3,3)}{Q26}
+\State{(0,3)}{Q27} \State{(20,2)}{Q28} \State{(-5,3)}{Q29}
+\State[s]{(-6,11)}{Q3} \State{(2,3)}{Q30} \State[s]{(9,3)}{Q33}
+\State{(17,4)}{Q36} \State{(-4,5)}{Q37} \State{(-1,5)}{Q38}
+\State{(2,5)}{Q39} \FinalState[f]{(-4,9)}{Q4} \State[s]{(-7,4)}{Q40}
+\FinalState[f]{(4,4)}{Q41} \State{(18,2)}{Q42} \State{(14,4)}{Q43}
+\State{(11,3)}{Q44} \State[s]{(-6,9)}{Q5} \State[9]{(14,10)}{Q64}
+\State[3]{(9,11)}{Q65} \State[4]{(12,11)}{Q66} \State[7]{(10,9)}{Q67}
+\State[5]{(5,9)}{Q68} \State[2]{(6,11)}{Q69} \State[6]{(7,9)}{Q70}
+\State[1]{(3,10)}{Q71} \State[8]{(12,9)}{Q72} \State[s]{(1,10)}{Q74}
+\State[10]{(16,10)}{Q75} \State[11]{(18,10)}{Q82} \FinalState[f]{(25,10)}{Q83}
+\State[12]{(20,10)}{Q84} \State[13]{(23,10)}{Q85} \State{(-3,-1)}{Q88}
+\FinalState[f]{(2,-1)}{Q89} \State{(-5,-1)}{Q90} \State[s]{(-7,-1)}{Q92}
+\State{(0,-1)}{Q93}
+%6 initial-final
+\Initial{Q0} \Initial{Q13} \Initial{Q3} \Initial{Q40}
+\Initial{Q5} \Initial{Q92}
+%58 transitions
+\EdgeL{Q0}{Q1}{a} \EdgeL{Q14}{Q15}{c}
+\EdgeL{Q26}{Q27}{b} \LArcR{Q27}{Q26}{?}
+\EdgeL{Q27}{Q30}{?} \EdgeL{Q29}{Q26}{?}
+\LArcR{Q29}{Q30}{?} \EdgeL{Q3}{Q2}{b}
+\ArcR{Q30}{Q41}{?} \EdgeL{Q37}{Q38}{a}
+\ArcL{Q39}{Q41}{?} \ArcL{Q40}{Q37}{?}
+\ArcR{Q40}{Q29}{?} \EdgeL{Q5}{Q4}{c}
+\EdgeL{Q64}{Q75}{?} \VArcR{arcangle=-65,ncurv=1}{Q64}{Q71}{?}
+\ArcL{Q66}{Q64}{?} \EdgeL{Q67}{Q72}{?}
+\LArcR{Q67}{Q70}{?} \LArcR{Q68}{Q72}{?}
+\EdgeL{Q68}{Q70}{?} \EdgeL{Q69}{Q65}{a}
+\EdgeL{Q70}{Q67}{b} \ArcR{Q71}{Q68}{?}
+\ArcL[0.7]{Q71}{Q69}{?} \ArcR{Q72}{Q64}{?}
+\EdgeL{Q74}{Q71}{?} \VArcR{arcangle=-45}{Q74}{Q75}{?}
+\LArcR{Q82}{Q83}{?} \EdgeL{Q82}{Q84}{?}
+\EdgeL{Q84}{Q85}{c} \EdgeL{Q85}{Q83}{?}
+\EdgeR{Q88}{Q93}{c} \LArcR{Q90}{Q89}{?}
+\EdgeL{Q90}{Q88}{?} \LArcR{Q93}{Q88}{?}
+\EdgeL{Q93}{Q89}{?} \EdgeL{Q13}{Q14}{a}
+\EdgeL{Q38}{Q39}{c} \VArcR{arcangle=-65,ncurv=1}{Q22}{Q44}{?}
+\EdgeL{Q22}{Q21}{?} \ArcL{Q23}{Q22}{?}
+\EdgeL{Q24}{Q25}{?} \LArcR{Q24}{Q28}{?}
+\EdgeL{Q25}{Q42}{b} \ArcR{Q28}{Q22}{?}
+\EdgeL{Q33}{Q44}{?} \VArcR{arcangle=-45}{Q33}{Q21}{?}
+\EdgeL{Q42}{Q28}{?} \LArcR{Q42}{Q25}{?}
+\EdgeL{Q43}{Q36}{a} \ArcL[0.7]{Q44}{Q43}{?}
+\ArcR{Q44}{Q24}{?} \EdgeL{Q36}{Q23}{c}
+\EdgeL{Q92}{Q90}{a} \EdgeL{Q65}{Q66}{c}
+\EdgeL{Q75}{Q82}{a} \LArcR{Q85}{Q84}{?}
+\end{VCPicture}
+\end{document}

@@ -1,0 +1,19 @@
+\documentclass[11pt]{article}
+\usepackage{vaucanson-g}
+\begin{document}
+\begin{VCPicture}{(-1,10)(0,11)}
+%6 states
+\State[III]{(-7.4,12.675)}{Q0} \FinalState[I]{(-3.875,12.725)}{Q1} \State[IV]{(-0.475,12.675)}{Q2}
+\FinalState[II]{(-4.575,16.75)}{Q3} \State[V]{(-10.825,15.925)}{Q4} \State[VI]{(-10.85,9.975)}{Q5}
+%1 initial-final
+\Initial{Q0}
+%13 transitions
+\VCurveL[0.5]{angleA=45,angleB=155,ncurv=0.5}{Q0}{Q2}{c} \EdgeL{Q1}{Q2}{a,b,c}
+\LoopE[0.5]{Q2}{a,b,c} \EdgeL{Q3}{Q2}{a,b}
+\EdgeR{Q3}{Q0}{c} \EdgeL{Q0}{Q4}{a}
+\EdgeR{Q4}{Q5}{a} \EdgeL{Q4}{Q3}{b}
+\LoopS{Q5}{a} \EdgeL{Q5}{Q1}{b}
+\EdgeL{Q5}{Q2}{c} \EdgeL[0.5]{Q0}{Q1}{b}
+\VCurveL{angleA=90,angleB=90,ncurv=0.8}{Q4}{Q2}{c}
+\end{VCPicture}
+\end{document}
